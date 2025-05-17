@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-DisasterGuard</title>
+  <style>
+    /* Color palette */
+    :root {
+      --primary-red: #c0392b;
+      --primary-red-light: #e74c3c;
+      --primary-red-lighter: #f1948a;
+      --accent-blue: #2980b9;
+      --accent-blue-light: #5dade2;
+      --background-light: #fff5f5;
+      --background-lighter: #fffaf9;
+      --text-dark: #2c3e50;
+      --text-light: #7f8c8d;
+      --gray-light: #ecf0f1;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background-lighter);
+      color: var(--text-dark);
+    }
+
+    nav {
+      background: var(--primary-red-light);
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 3px 8px rgba(192, 57, 43, 0.4);
+    }
+
+    nav h1 {
+      color: #fff;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.8rem;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: var(--primary-red-lighter);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem 4rem;
+      background: linear-gradient(135deg, var(--primary-red-lighter), var(--background-lighter));
+      color: var(--primary-red);
+      animation: fadeIn 2s ease-in-out;
+      box-shadow: inset 0 0 60px rgba(192, 57, 43, 0.1);
+    }
+
+    .hero h2 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 500;
+      color: var(--primary-red-light);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 3rem 1rem 4rem;
+      flex-wrap: wrap;
+      background: var(--background-light);
+    }
+
+    .card {
+      background: #fff;
+      padding: 2rem 1.5rem;
+      border-radius: 15px;
+      width: 270px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      color: var(--text-dark);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 30px rgba(192, 57, 43, 0.3);
+    }
+
+    .card h3 {
+      margin-bottom: 0.7rem;
+      color: var(--primary-red);
+      font-weight: 700;
+    }
+
+    .card p {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .form-box {
+      max-width: 400px;
+      margin: 4rem auto;
+      padding: 2.5rem 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(192, 57, 43, 0.15);
+      text-align: center;
+    }
+
+    .form-box h2 {
+      color: var(--primary-red);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.7px;
+    }
+
+    .form-box input {
+      display: block;
+      width: 100%;
+      margin: 1rem 0;
+      padding: 0.7rem 1rem;
+      font-size: 1.05rem;
+      border: 1.8px solid var(--gray-light);
+      border-radius: 6px;
+      transition: border-color 0.3s;
+    }
+
+    .form-box input:focus {
+      border-color: var(--primary-red-light);
+      outline: none;
+    }
+
+    .form-box button {
+      background: var(--primary-red);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+      box-shadow: 0 4px 10px rgba(192, 57, 43, 0.3);
+    }
+
+    .form-box button:hover {
+      background: var(--primary-red-light);
+      box-shadow: 0 6px 15px rgba(231, 76, 60, 0.6);
+    }
+
+    .dashboard {
+      max-width: 650px;
+      margin: 4rem auto;
+      padding: 2.5rem 2rem;
+      background: #fff;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(192, 57, 43, 0.15);
+      color: var(--text-dark);
+    }
+
+    .dashboard h2 {
+      color: var(--primary-red);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .dashboard p {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--primary-red-light);
+    }
+
+    .dashboard ul {
+      text-align: left;
+      margin: 1rem auto 2rem;
+      padding-left: 1.3rem;
+      max-width: 300px;
+      font-weight: 600;
+      color: var(--text-light);
+      font-size: 1.05rem;
+    }
+
+    .dashboard button {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: background-color 0.3s;
+      box-shadow: 0 4px 10px rgba(41, 128, 185, 0.4);
+    }
+
+    .dashboard button:hover {
+      background: var(--accent-blue-light);
+      box-shadow: 0 6px 15px rgba(93, 173, 226, 0.6);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.2rem;
+      background: var(--primary-red-light);
+      color: #fff;
+      margin-top: 4rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 1rem;
+      }
+
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>AI-DisasterGuard</h1>
+    <ul>
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#signin" class="nav-link">Sign In</a></li>
+      <li><a href="#signup" class="nav-link">Sign Up</a></li>
+      <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="page">
+    <div class="hero">
+      <h2>Predict. Prepare. Protect.</h2>
+      <p>AI-powered prediction and management system for natural disasters.</p>
+    </div>
+    <div class="features">
+      <div class="card">
+        <h3>Real-Time Alerts</h3>
+        <p>Get instant alerts about possible disasters like earthquakes and floods.</p>
+      </div>
+      <div class="card">
+        <h3>Emergency Management</h3>
+        <p>Coordinate relief and rescue with smart mapping and tools.</p>
+      </div>
+      <div class="card">
+        <h3>Predictive Analytics</h3>
+        <p>Use data analytics to foresee and reduce disaster impacts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="signin" class="page" style="display:none;">
+    <form class="form-box">
+      <h2>Sign In</h2>
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <section id="signup" class="page" style="display:none;">
+    <form class="form-box">
+      <h2>Sign Up</h2>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Create Password" required />
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <section id="dashboard" class="page" style="display:none;">
+    <div class="dashboard">
+      <h2>Welcome to Your Dashboard</h2>
+      <p>Prediction Summary:</p>
+      <ul>
+        <li>Flood Risk: Moderate</li>
+        <li>Earthquake Probability: Low</li>
+        <li>Cyclone Alerts: None</li>
+      </ul>
+      <button
